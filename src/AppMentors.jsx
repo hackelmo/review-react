@@ -1,20 +1,22 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
+import personReducder from "./reducer/person_reducer";
 
 export default function AppMentors() {
-  const [person, setPerson] = useState({
-    name: "엘리",
-    title: "개발자",
-    mentors: [
-      {
-        name: "밥",
-        title: "시니어개발자",
-      },
-      {
-        name: "제임스",
-        title: "시니어개발자",
-      },
-    ],
-  });
+  const [person, dispatch] = useReducer(personReducder, initialState);
+  const handleUpdate = () => {
+    const prev = prompt(`누구의 이름을 바꾸고 싶은가요?`);
+    const current = prompt(`이름을 무엇으로 바꾸고 싶은가요?`);
+    dispatch({ type: "updated", prev, current });
+  };
+  const handleAdd = () => {
+    const name = prompt(`멘토이름`);
+    const title = prompt(`멘토 타이틀`);
+    dispatch({ type: "added", name, title });
+  };
+  const handleDelete = () => {
+    const name = prompt(`누구의 이름을 삭제`);
+    dispatch({ type: "deleted", name });
+  };
   return (
     <div>
       <h1>
@@ -28,43 +30,24 @@ export default function AppMentors() {
           </li>
         ))}
       </ul>
-      <button
-        onClick={() => {
-          const prev = prompt(`누구의 이름을 바꾸고 싶은가요?`);
-          const current = prompt(`이름을 무엇으로 바꾸고 싶은가요?`);
-          setPerson((person) => ({
-            ...person,
-            mentors: person.mentors.map((mentor) =>
-              mentor.name === prev ? { ...mentor, name: current } : mentor
-            ),
-          }));
-        }}
-      >
-        멘토의 이름을 바꾸기
-      </button>
-      <button
-        onClick={() => {
-          const name = prompt(`멘토이름`);
-          const title = prompt(`멘토 타이틀`);
-          setPerson((person) => ({
-            ...person,
-            mentors: [...person.mentors, { name, title }],
-          }));
-        }}
-      >
-        멘토 추가
-      </button>
-      <button
-        onClick={() => {
-          const name = prompt(`누구의 이름을 삭제`);
-          setPerson((person) => ({
-            ...person,
-            mentors: person.mentors.filter((mentor) => mentor.name !== name),
-          }));
-        }}
-      >
-        멘토 제거
-      </button>
+      <button onClick={handleUpdate}>멘토의 이름을 바꾸기</button>
+      <button onClick={handleAdd}>멘토 추가</button>
+      <button onClick={handleDelete}>멘토 제거</button>
     </div>
   );
 }
+
+const initialState = {
+  name: "엘리",
+  title: "개발자",
+  mentors: [
+    {
+      name: "밥",
+      title: "시니어개발자",
+    },
+    {
+      name: "제임스",
+      title: "시니어개발자",
+    },
+  ],
+};
