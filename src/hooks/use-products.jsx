@@ -11,7 +11,7 @@ export default function useProducts({ salesOnly }) {
     fetch(`data/${salesOnly ? "sale_" : ""}products.json`)
       .then((res) => res.json())
       .then((data) => {
-        console.log("🔥뜨끈한 데이터를 네트워크에서 받아옴");
+        console.log("🔥뜨끈한 데이터를 네트워크에서 받아옴!!");
         setProducts(data);
       })
       .catch((e) => setError("에러가 발생했음"))
