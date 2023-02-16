@@ -9,6 +9,7 @@ export default function personReducder(person, action) {
         ),
       };
     }
+
     case "added": {
       const { name, title } = action;
       return { ...person, mentors: [...person.mentors, { name, title }] };
@@ -21,6 +22,7 @@ export default function personReducder(person, action) {
         mentors: person.mentors.filter((mentor) => mentor.name !== name),
       };
     }
+
     default: {
       throw Error(`알수없는 에러 타입이다:${action.type}`);
     }

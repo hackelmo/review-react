@@ -4,11 +4,13 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import AppMentors from "./AppMentors";
 import AppMentorsImmer from "./AppMentorsImmer";
+import AppTheme from "./AppTheme";
+import AppProducts from "./basic/AppProducts";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <AppMentorsImmer />
+    <AppProducts />
   </React.StrictMode>
 );
 

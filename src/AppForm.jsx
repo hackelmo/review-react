@@ -2,14 +2,23 @@ import React, { useState } from "react";
 
 export default function AppForm() {
   const [form, setFrom] = useState({ name: "", email: "" });
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(form);
   };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFrom((prev) => ({ ...prev, [name]: value }));
+    setFrom({ ...form, [name]: value });
   };
+
+  //둘의 차이는 없나??
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFrom((prev) => ({ ...prev, [name]: value }));
+  // };
+
   return (
     <form onSubmit={handleSubmit}>
       <label htmlFor="name">이름:</label>
